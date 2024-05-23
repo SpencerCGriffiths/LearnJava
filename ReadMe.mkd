@@ -1,0 +1,567 @@
+Java Orignal designed and released in 1995. Object Oriented Programming Language. 
+
+The Java Virtual Machine (JVM): 
+
+The JVM is responsible for taking in Java bytecode and executing the instructions of a program. 
+
+The JVM made Java popular as it allows a Java program to run the same way on different OS and Platforms. 
+
+This is why Java has the slogan WORA (write once, run anywhere).
+
+Cycle of a Java Program: 
+
+Code is written in a .java file. When run this is converted to bytecode (a machine language). The bytecode is sent to the JVM where it is analysed and then executed. The JVM terminates once it executes the final instruction. 
+
+Note: The Java compiler turns the code to bytecode and the JVM then interprets. The JVM is not a compiler. 
+
+!!!!!!
+Syntax
+
+Google has compiled a guide: https://google.github.io/styleguide/javaguide.html to find something specific. 
+
+Naming Conventions: 
+
+Java uses Camel case for most names. 
+
+Class and Interface names use PascalCase i.e. LinkedList. 
+
+Constants use SNAKE_CASE i.e. VALUE_OF_PI.
+
+Brackets and Parentheses: 
+
+Brackets must be used for all method and class declarations, conditionals and loops with multiple lines. 
+
+They can be omited for single line but better for readability. 
+
+if (true) {
+    return false; 
+}
+
+Indentations and Spacing: 
+
+Amount of indentation and white space does not affect compiling or runing. 
+
+However, spacing should be added for readability. 
+
+
+!!!!!
+Downloading Java:
+
+There are many IDE's that can run Java but it can also be run from the command line. 
+
+Your computer most likely has the Java Runtime Environment to run programs. It compiles Java Bute Code from generic files to be run specificaly on your type of computer. 
+
+As a Developer you need the Java Development Kit (JDK). Allowing you to access classes and interfaces of teh core Jaa language. 
+
+There are a variety of versions of JDK at: https://www.oracle.com/java/technologies/downloads/. However most development occurs in standard edition (SE). 
+
+!!!!
+Compiling Java:
+
+Before running a program in the command line it muse be compiled. Navigate to where the file is you want to run and use e.g. 
+
+``` 
+javac MyClass.java
+```
+This creates the .class file that can be executed. If there are any bugs they will be flagged at this point and the file will not be created. 
+
+!!!
+Running Java 
+
+Once Executable you can run it using: 
+
+```
+java MyClass 
+```
+
+(omit the .java or .class suffix)
+
+Complete example:  !!! <---- Very Important: 
+
+file: HelloWorld.java contains: 
+
+public class HelloWorld {
+  public static void main(String[] args) {
+    System.out.println("Hello world!");
+  }
+}
+
+CLI: 
+
+javac HelloWorld.java 
+
+Output: HelloWorld.class created
+
+java HelloWorld
+
+output: Hello world!
+
+
+Main Method Params !!! <---- Very Important: 
+
+Every main method contains the params String[] args. This means that args is an array of strings. We can use these in our class if we wish. 
+
+All arguments passed in the cli will be treated as strings and so numbers need to be parsed.
+
+Some files will have a main method and others will not. When we use the java command we are specifying which java class that we should look for the main method in. 
+
+Complete example:  !!! <---- Very Important: 
+
+file: HelloWorld.java contains: 
+
+public class HelloWorld {
+  public static void main(String[] args) {
+    System.out.println("Hello world, my name is " + args[0] + "!");
+  }
+}
+
+CLI: 
+
+javac HelloWorld.java 
+
+Output: HelloWorld.class created
+
+java HelloWorld Batman
+
+output: Hello world, my name is Batman!
+
+
+!!!!
+Hello World and Class Structure
+
+Class Structure: 
+Object-oriented programming consisting of classes and methods. Java only has methods and no functions. 
+
+Classes: 
+Public - Can be accessed from any other class or method in the environment. 
+
+Private- restricts the visibiliy of a class to within the parent class e.g. 
+
+public class MyClass {
+    private int privateVariable;  // Only accessible within MyClass
+
+    private void privateMethod() {
+        // Only callable within MyClass
+    }
+}
+
+i.e. in Java the top level cannot be private otherwise it could never be called. 
+
+Protected- Middle ground whereby the protected member is accesibile within the ame package and in subclasses even in different packages. 
+
+e.g. 
+public class BaseClass {
+    protected void protectedMethod() {
+        // Accessible in subclasses and in the same package
+    }
+}
+
+public class DerivedClass extends BaseClass {
+    void accessMethod() {
+        protectedMethod();  // Allowed access
+    }
+}
+
+Methods: 
+Every Java program must have a method called main(). This main method holds all of the instructions for the program (the master method that controls the whole program). As noted this main method always has String[] args. 
+
+e.g.
+/home/spencer/LearnJava/CodingExamples/HelloWorld/HelloWorld.java
+
+!!! 
+Print Statements 
+
+Print Statements: 
+system.out.print("Some Text");
+prints on the line. If you system.out.print they will print next to each other: 
+system.out.print("Some Text");
+system.out.print("Some Text");
+Output: 
+Some TextSome Text
+
+system.out.println("Some Text");
+prints and then creates a new line for the next piece of text. 
+system.out.println("Some Text");
+system.out.print("Some Text");
+Output: 
+Some Text
+Some Text
+
+!!!
+Comments
+
+inline Comments: 
+// Here is a comment
+
+Block comments: 
+/* Here is some text that could be 2 lines */ 
+
+!!!
+Variables and Types
+
+Declaring: 
+When declaring a variable the dataType must be declared. 
+
+Syntax <- important-> 
+dataType variableName = value;
+
+dataType variableName;
+
+dataType variableName;
+
+Data Types: 
+int- 
+Whole numbers 
+*between -2147483648 and 2147483647
+e.g. int moonLanding = 1969;
+
+double- 
+Decimals
+*4.9E-324 and 1.7976931348623157E+308:
+e.g. double PI = 3.14;
+
+boolean- 
+true or false
+e.g. boolean isRaining = true;
+
+char 
+single character
+e.g. char firstLetter = 'a';
+
+
+Manipulating Number-Based Variables: 
+Mathmatical symbols are valid syntax as in JavaScript i.e. 
+
+int num = 3 + 2; // num now equals 5
+num = num - 1; // num now equals 4
+
+you can increment and decrement: 
+++ -- 
+
+and compound: 
++= 
+
+!!!!
+Strings
+
+strings are a reference data type as they are objects from the String class. 
+e.g. String greetings = "Greetings, earthlings!"
+
+!!!!
+Conditional Statements and Comparison Operators
+
+if: 
+
+if (expression) {
+  // Code to run if expression is true
+}
+
+else: 
+
+if (expression) {
+  // Code to run if expression is true
+} else {
+  // Code to run if expression is false
+}
+
+if- else: 
+
+if (expression) {
+  // Code to run if expression is true
+} else if (expression) {
+  // Code to run if previous expression is false and current condition is true
+} else {
+  // Code to run if all previous expressions are false
+}
+
+Comparison Operators: 
+e.g.
+&& - and 
+|| - or 
+! - not 
+== - equal to 
+!= - not equal to 
+etc. 
+
+!!!
+Loops
+
+While: 
+
+while (num < 20) {
+  num = num + 1;
+}
+
+do-while: 
+
+do {
+ System.out.println("2 is equal to 4!");
+} while (2 == 4);
+
+for: 
+
+for (int i = 0; i <= 10; i++) {
+  System.out.println(i);
+}
+
+for each: 
+
+for (String s : myArray) {
+  // Do something
+}
+(each element in the array is a string, s holds the value of the element in the loop, myArray is what is being iterated)
+
+break: 
+Used to exit a loop- 
+
+for (int i = 0; i < 10; i++) {
+  System.out.println(i);
+  if (i == 4) {
+    break;
+  }
+}
+
+continue: 
+continue will skip an interation if true and go to the next iteration without exiting the loop altogether. 
+
+for (int i = 0; i < numbers.length; i++) {
+  if (numbers[i] % 2 == 0) {
+    continue;
+  }
+  System.out.println(numbers[i]);
+}
+
+!!!
+User-Defined Methods
+
+Anatomy of a Method: 
+
+public static void exampleMethod() {
+  System.out.println("Hello Method!");
+}
+
+public method- can be accesed by any part of the program. 
+
+static method - can be called throughout a program without creating an object of the class 
+
+void method- does not return a value 
+
+empty brackets- this method takes no params
+
+(A method is called with exampleMethod() )
+
+!!!
+Params and Arguments: 
+
+Parameters are the holders that are put in place when declaring the method i.e. 
+public static void exampleMethod(String greeting, String name) {
+  System.out.println(greeting + " " + name);
+}
+
+Arguments are what are passed when it is invoked: 
+public static void main(String[] args) {
+  exampleMethod("Greetings", "Earthling");
+}
+
+!!! 
+Returning: 
+
+if the function is returning then the data type to be returned needs to be declared 
+
+e.g. 
+public static int findProduct(int num1, int num2) {
+  return num1 * num2;
+}
+public static void main(String[] args) {
+  int product = findProduct(3,4);
+  System.out.println(product); // Prints: 12
+}
+
+String Methods: 
+
+.length() - length
+
+.concat() - concatenates - adds to end of another string e.g. name.concat("cademy")
+
+.equals() - checks equality as we cannot use == with strings. e.g. flavor1.equals("Mango")
+
+.indexOf() - index of the first occurence of a char. e.g. letters.indexOf("C") 
+
+.charAt() - returns char at the index. e.g. currency.charAt(2)
+
+.substring() outputs the string split. One arg will cut from that index to end. Two is the beginning and then end index. e.g. line.substring(7, 24)
+
+.toUpperCase() / .toLowerCase() - Makes all chars upper or lower case. 
+
+
+Code Challenge: 
+
+1. Leftover Funds
+We start with 0 burritos, and a quantity of money. Update the code to return false or true as to whether there is left over funds. 
+
+CodingExamples/BurritoCalculator/BurritoCalculator.java
+
+2. Burritos Sold
+Update the function to work out how many Burritos sold. 
+
+CodingExamples/BurritoCalculator2/BurritoCalculator2.java
+
+Code Challenge: 
+
+1. Create new string with chars reversed
+CodingExamples/Reverse/Reverse.java 
+
+2. Find if one or more substrings has a problem
+CodingExamples/Replace/Replace.java
+
+!!!
+Arrays
+
+Declaring an empty array: 
+(this declares and tells the machine that there will be a an array with this name created in the future but currently this does not point to an actual space in memory! - see create empty array)
+
+int[] lottoNumbers;
+String[] clothingItems;
+
+Declaring a populated array:
+
+int[] lottoNumbers = {12, 29, 4, 38, 3};
+String[] clothingItems = {"Huipil", "Beanie", "Kimono", "Sari"};
+
+Accessing an element by index: 
+(0 indexed)
+
+String[] clothingItems = {"Huipil", "Beanie", "Kimono", "Sari"};
+clothingItems[2];
+
+Changing an Elements Value: 
+
+arrayName[index] = newValue;
+
+
+Create an Empty array: 
+(this initialises the array and populates it with empty null values)
+
+dataType[] emptyArrayName = new dataType[number of elements in array];
+
+.length: 
+provides the number of elements
+
+e.g:
+lottoNumbers.length
+
+for loop: 
+
+e.g.
+for (int i = 0; i < lottoNumbers.length; i++) {
+  // action
+}
+
+for-each loop: 
+
+e.g
+int[] lottoNumbers = {12, 29, 4, 38, 3};
+for (int num: lottoNumbers) {
+  System.out.println(num);
+}
+
+Example: 
+CodingExamples/ArraysExample/ArraysExample.java
+
+!!!
+2D Arrays
+
+A two dimensional array is an array that stores arrays of the same data type
+
+i.e. 
+
+[["a","b","c"],["d","e","f"],["g","h","i"]]
+
+Declaring a 2D array: 
+
+dataType[][] variableName; 
+
+e.g.
+int[][] nums;
+
+
+Declaring and populating:
+
+int[][] nums = {{10, 9, 8}, {7, 6, 5}, {4, 3, 2}}; 
+
+Accessing an element in a 2D array: 
+
+arrayName[firstIndex][secondIndex]
+
+e.g. 
+
+int[][] nums = {{10, 9, 8}, {7, 6, 5}, {4, 3, 2}}; 
+// Within the first array, access the second element:
+System.out.println(nums[0][1]); // Prints: 9
+
+Updating a value: 
+
+this is the same as a standard array using the assignment operator
+
+e.g.
+char[][] letters = {{'A', 'a'}, {'B', 'x'}, {'C', 'c'}};
+
+// Update the value:
+letters[1][1] = 'b';
+System.out.println(letters[1][1]); // Prints: b
+
+creating an empty 2D array: 
+As with a normal array the length of the array needs to be qualified. 
+
+
+
+e.g
+int[][] intArray = new int[2][3];
+
+!!! 
+Row- Major Order
+
+Traversal path that moves horizontally through each row starting at the first to the last i.e. 
+
+[[1, 2, 3],
+[4, 5, 6],
+[7, 8, 9],
+[10, 11, 12]]
+
+Can be done with an outer and inner loop: 
+Outer loop iterate the length of the array counted the nested arrays. 
+Inner loop counts the elements in the nested array. 
+Once a nested array completed it will move on to the next iteration of the outer loop which is the next array. 
+
+for (int i = 0; i < letters.length; i++){
+  for (int j = 0; j < letters[0].length; j++){
+    System.out.print(letters[i][j]);
+  }
+}
+
+Column- Row Order
+
+Traversal path that moves vertically down each column starting with the first to last. 
+i.e. 
+
+[[1,5,9,13],
+[2,6,10,14],
+[3,7,11,15],
+[4,8,12,16]]
+
+nested for loop: 
+Outer loop iterate the length of a nested array
+inner loop iterate the number of nested arrays. 
+Outer loop targets the column whilst inner loop targets the row. 
+
+e.g. 
+for (int i = 0; i < letters[0].length; i++){
+  for (int j = 0; j < letters.length; j++){
+    System.out.print(letters[j][i]);
+  }
+}
+
+Challenges: 
+
+1. Total cost for Groceries
+CodingExamples/GroceryList/GroceryList.java
