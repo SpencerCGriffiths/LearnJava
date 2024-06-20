@@ -561,7 +561,55 @@ for (int i = 0; i < letters[0].length; i++){
   }
 }
 
+Arrays.sort()  - to sort arrays alphanumerically etc. 
+
+Array Lists have mutable size (you can add and remove elements freely). 
+
 Challenges: 
 
 1. Total cost for Groceries
 CodingExamples/GroceryList/GroceryList.java
+
+2.  Most Expensive Grocery Item
+CodingExamples/GroceryList2/GroceryList2.java
+
+3. Lengthy Groceries
+CodingExamples/LengthyGroceries/LengthyGroceries.java
+
+4. Special Item 
+/home/spencer/LearnJava/CodingExamples/HasSpecialItem/HasSpecialItem.java
+
+5. Alphabetical Items
+/home/spencer/LearnJava/CodingExamples/isAlphabetised/isAlphabetized.java
+
+6. Duplicate Items
+/home/spencer/LearnJava/CodingExamples/HasDuplicates/HasDuplicates.java
+
+7. Reverse the array of Groceries
+/home/spencer/LearnJava/CodingExamples/ReverseGroceries/ReverseGroceries.java
+
+8. 
+/home/spencer/LearnJava/CodingExamples/RotateArray/RotateArray.java
+
+## Code Challenge: Traversing 2D Arrays
+
+Traversing a 1D Array: 
+/home/spencer/LearnJava/CodingExamples/KoalaCounting/KoalaCounting.java
+
+Traversing a 2D array: 
+
+Add up the numbers in the nested 2D array
+/home/spencer/LearnJava/CodingExamples/GetTotal/GetTotal.java
+
+Searching for a Value in a 2D array: 
+searching through 2D array to find values that meet a certain condition- 
+/home/spencer/LearnJava/CodingExamples/FindValueGreater/FindValueGreater.java
+
+Find the collumn with Largest Value: 
+search array by column rather than row to find largest column array- 
+/home/spencer/LearnJava/CodingExamples/LargestValue/LargestValue.java
+
+---------------------------------------------------------------------------------
+
+
+

@@ -1,0 +1,44 @@
+<section class="MobileContactInfo" style="text-align: right;">
+
+    <!-- Mobile Link -->
+<div> 
+    <a href="#ContactUs" class="mobileContact" style="text-decoration: none; color: white; font-family:Baloo">
+        <span> tap here to contact us</span>     
+</a>
+    <a href="#ContactUs" class="desktopContact" style="text-decoration: none; color: white; font-family:Baloo">
+    <span><i class="fa-solid fa-phone"></i>click here to contact us<i class="fa-solid fa-phone"></i></span>     
+</a>
+</div>
+</section>
+
+<style>
+    @media (max-width: 768px) {
+        /* Show mobile link on mobile */
+        .mobileContact {
+            display: inline-block;
+            font-size: 1.5rem;
+            overflow-wrap: break-word;
+            white-space: normal;
+        }
+        .desktopContact { 
+            display: none; 
+        }
+    }
+    @media (min-width: 769px) {
+        /* Hide mobile link on desktop */
+        .mobileContact {
+            display: none;
+        }
+        .desktopContact { 
+            display: inline-block;
+            font-size: 1.5rem;
+            padding-top: 2rem;
+            height: 2rem; 
+            overflow-wrap: break-word;
+            white-space: normal;
+        }
+    }
+
+</style>
+
+#ContactUs
