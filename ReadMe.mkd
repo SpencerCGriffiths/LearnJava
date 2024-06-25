@@ -1257,6 +1257,8 @@ Example:
   }
 
 # Project- Language Families
+**Project Files** 
+/home/spencer/LearnJava/LanguageFamilies
 
 *Error*
 During the project i found that i could not compile one Class that called the subclass as the subclass was not yet compiled. However, i could not compile the subclass because it relied on the other class. 
@@ -1276,3 +1278,112 @@ public class LanguageTest {
         myMayan.getInfo();
     }
 }
+
+# Lists
+
+Java has built-in *List* Class
+
+Array has a fixed size. To create mutable and dynamic store/lists we can use List classes
+
+They allow us to:
+- Store object references as elements 
+- Store elements of the same type (like arrays)
+- Access elements by index (like arrays)
+- Add elements 
+- Remove elements
+
+## ArrayLists 
+
+built in ArrayList Class uses dynamic array to store its elements. You can retrieve elements by their index, no size limit. 
+
+ArrayLists (in general) more efficient than other types of lists when storing and accessing elements. 
+
+### Declaring 
+
+- Must be declared with type that will be stored inside angle brackets
+
+Example: 
+
+ArrayList<Integer> myList = new ArrayList<Integer>();
+
+This creates a list with default initial capacity of 10. If you want to create a larger default capacity this can be declared such as 12 below 
+
+Example: 
+
+ArrayList<Integer> myList = new ArrayList<Integer>(12);
+
+It can be stretched beyond this capacity even when not declared etc. 
+
+*Can't use primitive types inside the angle brackets*
+Hence Integer instead of int (Integer is an object, ArrayLists store objects. String in Java is ablso an object so can store strings)
+
+Available types: 
+- tbc 
+
+#### Note- You must import java.util.ArrayList at the top of the program 
+
+### Adding to ArrayList .add()
+
+You can add using .add() method
+
+Example: 
+
+ArrayList<String> months = new ArrayLIst<String>(12);
+months.add("January"); 
+System.out.println(months); Prints: [January]
+
+#### Adding by Index
+
+To add by index indicate the index you want to add to. This will add the item to that index. If an element is already at that index the new element takes it place and everything including the one being replaced is shifted over by 1. 
+
+**You can only add an elemtn to a specified index that already exists/ or / the end of the list**
+*java.lang.IndexOutOfBoundsException* 
+
+### Retrieving a Value from an ArrayList .get()
+
+.get(i) 
+
+.get takes an index and retrieves that element. 
+
+Example: 
+  ArrayList<String> months = new ArrayList<String>(12);
+  months.add("January");
+  months.add("February");
+  months.add("March");
+  System.out.println(months.get(1)); // Prints: February
+
+### Removing from an ArrayList .remove()
+
+.remove(i)
+
+.remove removes the index, or it can remove the first occurance of the element
+
+Example: - index
+ArrayList<String> months = new ArrayList<String>(12); 
+months.add("January"); 
+months.add("February"); 
+months.add("March"); 
+months.remove(1)
+System.out.println(months); Prints: [January, March]
+
+Example: - Occurance
+ArrayList<String> months = new ArrayList<String>(12); 
+months.add("January"); 
+months.add("February"); 
+months.add("March"); 
+months.remove("February"); 
+System.out.println(months); // Prints: [January, March]
+
+## LinkedLists
+
+- ArrayLists are better for storing and accessing data. 
+
+- LinkedLists are more efficient for manipulating data. 
+  - Doubly Linked Lists
+
+### Declaring a LinkedList
+
+There are no sizes associated with LinkedLists. 
+
+Example: 
+LinkedList<String> days = new LinkedList<String>()
