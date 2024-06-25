@@ -1386,4 +1386,65 @@ System.out.println(months); // Prints: [January, March]
 There are no sizes associated with LinkedLists. 
 
 Example: 
-LinkedList<String> days = new LinkedList<String>()
+LinkedList<String> days = new LinkedList<String>(); 
+
+#### Note- You must import java.util.LinkedList at the top of the program 
+
+### Adding to a LinkedList .add()
+
+Similar to ArrayList the .add(element) method allows you to append to the end of the LinkedList.
+
+Example: 
+  LinkedList<String> days = new LinkedList<String>();
+  days.add("Monday");
+  days.add("Tuesday");
+  System.out.println(days); // Prints: [Monday, Tuesday]
+
+
+.add(i, element) adds the element to where you want the new element to go. 
+
+Example: 
+  LinkedList<String> days = new LinkedList<String>();
+  days.add("Monday");
+  days.add("Tuesday");
+  days.add(0, "Sunday");
+  System.out.println(days); // Prints: [Sunday, Monday, Tuesday]
+
+### Retrieving a Value from LinkedList .get()
+
+Example: 
+  LinkedList<String> days = new LinkedList<String>();
+  days.add("Monday");
+  days.add("Tuesday");
+  days.add(0, "Sunday");
+  System.out.println(days.get(1)); // Prints: Monday
+
+#### .getFirst() .getLast()
+
+Both are available for LinkedList
+
+### Remove from LinkedList .remove()
+
+Example: - index
+  LinkedList<String> days = new LinkedList<String>();
+  days.add("Monday");
+  days.add("Tuesday");
+  days.add(0, "Sunday");
+  days.remove(1);
+  System.out.println(days); // Prints: [Sunday, Tuesday]
+
+Example: - first occurence
+  LinkedList<String> days = new LinkedList<String>();
+  days.add("Monday");
+  days.add("Tuesday");
+  days.add(0, "Sunday");
+  days.remove("Monday");
+  System.out.println(days); // Prints: [Sunday, Tuesday]
+
+Example: - First element
+  LinkedList<String> days = new LinkedList<String>();
+  days.add("Monday");
+  days.add("Tuesday");
+  days.add(0, "Sunday");
+  days.remove();
+  System.out.println(days); // Prints: [Monday, Tuesday]
