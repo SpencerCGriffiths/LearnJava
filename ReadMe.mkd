@@ -1448,3 +1448,285 @@ Example: - First element
   days.add(0, "Sunday");
   days.remove();
   System.out.println(days); // Prints: [Monday, Tuesday]
+
+
+# HashMaps
+
+A HashMap is a built-in structure tha stores key-value pairs. Each key is a unique identifier for its associated value. 
+
+- Creating a HashMap 
+- Adding a key-Value pair
+- Accessing a value 
+- removing a key-value pair
+- traversing a HashMap 
+- additional HashMap methods
+
+## Creatng 
+
+*Ensure we import a Hashmap to use it* 
+
+import java.util.HashMap 
+
+Declaring a HashMap we state data type of key and value. We can only use reference type values: 
+
+HashMap<String, Integer> teaSteepingTemp = newHashMap<>(); 
+
+## Adding a Key-Value Pair .put() 
+
+.put() is used to add key-value pairs. The method requires two arguments, 
+1. The first is the key
+2. The second is the associated value
+
+Example: 
+HashMap<String, Integer> teaSteepingTemp = new HashMap<>();
+
+// Add key-value pairs to HashMap:
+teaSteepingTemp.put("Oolong", 185);
+teaSteepingTemp.put("Rooibos", 212);
+
+// Output a HashMap:
+System.out.println(teaSteepingTemp); // Prints: {Oolong=185, Rooibos=212}
+
+## Accessing a Value .get()
+
+.get() is used to retrieve an argument from the hashmap. The key is the unique identifier for the value
+
+Example: 
+int oolongTemp = teaSteepingTemp.get("Oolong");
+System.out.println(oolongTemp);  // Prints: 185
+
+## Removing Values .remove() .clear
+
+#### .remove()
+To remove a single key value pair .remove(key)
+
+Example: 
+HashMap<String, Integer> teaSteepingTemp = new HashMap<>();
+teaSteepingTemp.put("Oolong", 185);
+teaSteepingTemp.put("Rooibos", 212);
+
+// Remove an item:
+teaSteepingTemp.remove("Oolong");
+System.out.println(teaSteepingTemp); // Prints: {Rooibos=212}
+
+#### .clear()
+
+.clear() removes all items from the HashMap 
+
+Example: 
+HashMap<String, Integer> teaSteepingTemp = new HashMap<>();
+teaSteepingTemp.put("Oolong", 185);
+teaSteepingTemp.put("Rooibos", 212);
+
+// Remove all items:
+teaSteepingTemp.clear();
+System.out.println(teaSteepingTemp); // Prints: {}
+
+### Finding a Hashmap size .size()
+
+.size() returns the number of key-value pairs
+
+Example: 
+HashMap<String, Integer> teaSteepingTemp = new HashMap<>();
+teaSteepingTemp.put("Oolong", 185);
+teaSteepingTemp.put("Rooibos", 212);
+
+// Output the size of a HashMap:
+System.out.println(teaSteepingTemp.size()); // Prints: 2
+
+### Traversing a HashMap for-each
+
+in order to access each individual element in a HashMap you can use for-each loops: 
+
+
+Example: 
+
+HashMap<String, Integer> teaSteepingTemp = new HashMap<>();
+teaSteepingTemp.put("Oolong", 185);
+teaSteepingTemp.put("Rooibos", 212);
+    
+// Iterate through the HashMap:
+for (String key : teaSteepingTemp.keySet()) {
+  System.out.println("Brew " + key + " tea at " + teaSteepingTemp.get(key) + "°F");
+}
+/*
+Prints:
+Brew Oolong tea at 185°F
+Brew Rooibos tea at 212°F
+*/
+
+
+### Additional HashMap Methods
+
+.containsKey(key) 
+- takes key as an argument and returns true or false depending on if the key is present in the HashMap
+
+.replace(key, newVal)
+- takes the key and new value and replaces value at that key with the new value input
+
+.keySet()
+- returns a Set containing all the key values in the HashMap
+
+.values()
+- returns a Collection containing all the values (without their keys)
+
+
+# Sets
+
+A set stores *unordered* collection of unique Values. 
+
+- creating a Set 
+- adding items to a Set
+- removing items from a Set 
+- checking for an item 
+- finding the size of a Set 
+- iterating through a Set 
+- using Set operations
+
+## Set Types
+
+Set is derived from the Collection class. It contains all the methods from the Collection class but ensures that every element is unique. 
+
+There are different implementations, they all have the same methods and ensure to only store unique elements. 
+
+### HashSet (default)
+
+- HashSet implemented using a HashMap instance
+- Order of elements are random 
+- HashSet can store null values
+- Hashset has a 0(1) runtime for .add()/ .remove() and contains() 
+- *Hashset typically run faster than the other two options* 
+
+### TreeSet 
+
+- TreeSet implemented using a TreeMap instance
+- Element order determined using comparator (alpha or numerical order)
+- Treeset can NOT store null values 
+- Treeset has slower runtime 0(log n) for .add(), .remove() and .contains()
+
+### LinkedHashSet
+
+- LinkedHashSet implemented using doubly linked list and a hash table. 
+- Element order is determined by the order in which element is added
+- Capable of storing a null value
+- Has a 0(1) runtime for the .add(), .remove(), .contains() methods
+- slightly slower runtime than a HashSet
+
+## Creating a Set
+
+*To use we must import the class* 
+
+Example: 
+// Import Set class:
+import java.util.Set;
+
+// Import HashSet class:
+import java.util.HashSet;
+
+// Import TreeSet class:
+import java.util.TreeSet;
+
+// Import LinkedHashSet class:
+import java.util.LinkedHashSet;
+
+// Import all classes:
+import java.util.*;
+
+- We have to declare the type and data type (reference types)
+
+Example: 
+// Create a HashSet that will contain String Values: 
+Set<String> colours = new HashSet<String>(); 
+
+// Create a TreeSet that will contain Integer Value: 
+TreeSet<Integer> myNums = new TreeSet<Integer>(); 
+
+## Set Methods Add/Remove/Size/Iteration
+
+There are a variety of set methods that are available for all types of sets. 
+
+- .add(item)
+    colors.add("red");
+
+- .remove(item)
+    colors.remove("red");
+
+- .size()
+    colors.size();
+
+- iterating: 
+  for (String item: colors) {
+  System.out.println(item);
+}
+
+## Using Set Operations
+
+Set Class has several methods for different mathematical operations on two different sets
+
+### Union .addAll()
+
+Union of two sets will combine all values together. 
+
+*Syntax:*
+colors.addAll(primary)
+
+
+Example: 
+Set<String> colours = new HashSet<String>(); 
+colours.add("red"); 
+colours.add("orange"); 
+
+Set<String> primary = new HashSet<String>(); 
+primary.add("red"); 
+primary.add("yellow"); 
+
+colours.addAll(primary); 
+System.out.println(colours); // Prints [red, orange, yellow]
+
+
+### Intersection .retainAll()
+
+retains all the overlaps i.e. preetn in both
+
+*Syntax:* 
+colours.retainAll(primary); 
+
+
+*Example:* 
+Set<String> colours = new HashSet<String>(); 
+colours.add("red"); 
+colours.add("orange"); 
+
+Set<String> primary = new HashSet<String>(); 
+primary.add("red"); 
+primary.add("yellow"); 
+
+colours.retainAll(primary); 
+system.out.println(colours); // Prints: [red]
+
+### Complement .removeAll()
+
+complement stores value of one set after removing any overlapping values from another set. 
+
+Placement Matters! The resulting set will contain only the values found only in the Set that the method is appended to. Any value that appears in the argument Set will be removed: 
+
+*Syntax* 
+colours.removeAll(primary)
+
+*Example:* 
+Set<String> colours = new HashSet<String>(); 
+colours.add("red"); 
+colours.add("orange"); 
+
+Set<String> primary = new Hashset<String>(); 
+primary.add("red"); 
+primary.add("yellow"); 
+
+colours.removeAll(primary); 
+System.out.println(colours); // Prints: [orange]
+
+
+
+
+
+**Collection/ Set** 
