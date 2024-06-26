@@ -1315,7 +1315,7 @@ ArrayList<Integer> myList = new ArrayList<Integer>(12);
 It can be stretched beyond this capacity even when not declared etc. 
 
 *Can't use primitive types inside the angle brackets*
-Hence Integer instead of int (Integer is an object, ArrayLists store objects. String in Java is ablso an object so can store strings)
+Hence Integer instead of int (Integer is an object, ArrayLists store objects. String in Java is ablso an object so can store strings)ArrayList
 
 Available types: 
 - tbc 
@@ -1726,6 +1726,67 @@ colours.removeAll(primary);
 System.out.println(colours); // Prints: [orange]
 
 
+# Coding Challenge - ArrayLists
+## Loops involving ArrayLists: 
+Say you are a beekeeper and each bee in your beehive is represented by your Bee class:
+
+public class Bee {
+  private String name;
+  private boolean isHome;
+
+  public Bee(String name) {
+    this.name = name;
+    this.isHome = true;
+  }
+
+  public String getName() {
+    return this.name;
+  }
+
+  public void setName(String newName) {
+    this.name = newName;
+  }
+
+  public boolean isHome() {
+    return this.isHome;
+  }
+
+  public void leaveHome() {
+    this.isHome = false;
+  }
+
+  public void returnHome() {
+    this.isHome = true;
+  }
+} 
+
+
+### PrintBees
+- Write a method named printBees() that prints out the name of every bee in the bee list. Each name should be on its own line. 
+/home/spencer/LearnJava/ArrayListChallenges/PrintBee
+
+### Scavenger 
+- A scavenger bee has to leave for an expedition! Given the name of the bee that has to leave home, update the corresponding bee in the beeList to be away.
+
+- Each bee has an isHome property that determines where the bee is. To update this property to false, you can call the bee’s .leaveHome() method.
+
+******** 
+
+3. Moving In 
+
+- Last night our Queen Bee had a long stay at the bee maternity ward! This morning we discovered that she added new members to our bee hive! Given an ArrayList of the names for our new bees, write a method, .addBees() to add the new bees into our beeList family.
+
+4. Moving Out
+
+- Some of the bees wanted to move out of the hive to make room for new family members. In .moveOutBees(), remove every other bee in the list of bees, starting with the first bee.
+
+5. Strike
+
+- Our bees are going on strike, and they demand new names! Given an ArrayList of newNames in .renameBees(), update each bee’s name to a name in the ArrayList at the corresponding index.
+
+- For example, say we have the following names: {“jamie”, “alex”, “jeremy”}. The bee should index 0 should get the name “jamie”. The second bee should get the name “alex” and the third bee should get the name “jeremy”.
+
+- If there are not enough names for every bee in the beeList, then you don’t have to update the names for the remaining bees. (We can talk to them to work out a compromise).
 
 
 
