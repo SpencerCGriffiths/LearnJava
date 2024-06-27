@@ -1570,6 +1570,15 @@ Brew Rooibos tea at 212°F
 .values()
 - returns a Collection containing all the values (without their keys)
 
+.put(key, value); 
+- Adds to the map
+
+.containsKey(key); 
+- Returns true or false
+
+.get(key); 
+- Returns the corresponding value
+
 
 # Sets
 
@@ -1789,5 +1798,141 @@ public class Bee {
 - If there are not enough names for every bee in the beeList, then you don’t have to update the names for the remaining bees. (We can talk to them to work out a compromise).
 
 
+# Introduction to Dynamic Programming
 
-**Collection/ Set** 
+A Programming technique used to solve recursive problems more efficiently. 
+
+It increases time efficiiency by taking advantage of data structures to store reusable solutions to intermediate steps (saving redundant computations). 
+
+Its a way of solving problems with recursive relaitonships by solving smaller problems and building up the solution to the original problem. 
+
+## Fibonacci 
+- Fibonacci series - each number is equal to the sum of the two before it always starting with 0 and 1-
+
+*-*
+0, 1, 1, 2, 3, 5, 8, 13, 21 etc. 
+*-*
+
+**Iteratively**
+The 0th Fibonacci number is always 0. 
+The 1st Fibonacci number is always 1. 
+The 2nd therefor is 0+1=1 and 3rd 1+1=2. 
+
+We could calculate the nth number this way (iteratively). 
+
+**Recursively**
+We could also calculate it recursively: 
+
+fib(n)
+  if n is 0 or 1
+    return n
+  else
+    return fib(n - 1) + fib(n - 2)
+
+This technique breaks up calculating nth number in to small steps: 
+
+fib(n)
+  if n is 0 or 1
+    return n
+  else
+    return fib(n - 1) + fib(n - 2)
+
+Can be visualised as a tree: 
+
+
+         fib(5)
+         /    \
+     fib(4)   fib(3)
+     /    \    /   \
+  fib(3) fib(2) fib(2) fib(1)
+  /   \    / \   / \
+fib(2) fib(1) fib(1) fib(0)
+ / \
+fib(1) fib(0)
+
+fib(5) is calculated by seperating in to fib(4) and fib(3). These are then further broken down until the base cases of fib(1) and fib(0). 
+
+We have values for fib(1) and fib(0) as 1 and 0. 
+
+We can now add up the numbers following up the tree to get to the value of fib(5) which is 5. 
+
+- This requires such as large number of call and calculations with certain elements i.e. fib(2) being calculated multiple times. 
+
+We can avoid this with *memoization* 
+
+### Memoization 
+
+Memoization is a specialised form of caching used to store the result of a function call. 
+
+The next time that function is called, if the result is already stored somewhere, we trieve that instead of running again. 
+
+Memoization can result in much faster overall execution. 
+
+Memoization can increase memory requirements as functions results are stored in memory. 
+
+Memoization is a great technique to use alongside recursion. The memo can even be saved between function calls if its being used for common calculations in a program. 
+
+#### Memoizing Fibonacci 
+
+We can use a Java HasMap to store memoized values. Each key will represent n (starting at 0). 
+
+Then when we need to calculate a number its already been calculated and we can retrieve from the map in 0(1) time. 
+
+*- Psuedo Code -*
+
+Create a memo map
+
+fibMemo(n, map)
+  if n is 0 or 1
+    return n
+  if n key exists in map
+    return map.get(n)
+  else
+    calculate current fibonacci number through a recursive call
+    store value in map
+    return value
+
+/home/spencer/LearnJava/FibonacciMemoization/fibMemo.java : 
+        public static int fibMemo(int n, Map<Integer, Integer> map) {
+          if(n == 0 || n == 1) { 
+            map.put(n, n); // Initializing base case for Fibonacci of 0
+            map.put(n, n); // Initializing base case for Fibonacci of 1  
+          }
+
+          if (map.containsKey(n)) {
+              // If the value is already computed, return it from the map to save computation
+              return map.get(n);
+          } else {
+              // Compute the value for n by recursively calling fibMemo for n-1 and n-2
+              int value = fibMemo(n - 1, map) + fibMemo(n - 2, map);
+              // Store the computed value in map before returning
+              map.put(n, value);
+              return value;
+          }
+        }
+
+## The Knapsack Problem
+
+*The problem:*  
+You are a thief breaking in to a house. You can only carry so much. Some is Diamonds, gold, jewelry. The goal is to maximise the total value while remaining in the weight. 
+
+Total weight (weightCap)
+weight of each item (weight)
+value of each item (value)
+
+ring      = 1lb | $250 
+earrings  = 3lb | $300 
+necklace  = 5lb | $500
+
+Example: 
+weightCap = 5 
+weights = [1, 3, 5]
+values = [250, 300, 500]
+
+Outcome: 
+
+ring + earrings = 5lb (inside weightcap) | $550 (highest value)
+
+### Recursive solution: 
+
+Brute force option is to configure every subset of the items then take the maximum value subset. 
