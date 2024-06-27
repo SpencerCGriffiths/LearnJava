@@ -1933,6 +1933,369 @@ Outcome:
 
 ring + earrings = 5lb (inside weightcap) | $550 (highest value)
 
-### Recursive solution: 
+### Recursive solution
 
 Brute force option is to configure every subset of the items then take the maximum value subset. 
+
+To do this you would need the additional param i (where we are on the list). There are three posibilities for each call of this function: 
+
+1. WeightCap or i is 0 (i.e. there is no weight available, there are no items avilable)
+
+2. The weight of item were looking at exceeds weightCap so we move on to the next item 
+
+3. if neither are true then we have to consider if this item should be incuded in the optimal solution
+
+Example: 
+static int knapSack (int weightCap, int weights[], int values[], int i)
+    {        
+        if (i == 0 || weightCap == 0) {
+            return 0;
+        }
+
+        else if (weights[i - 1] > weightCap) {
+            return knapSack(weightCap, weights, values, i - 1);
+
+        } else {
+            return : correct answerMath.max(
+                   values[i - 1] + knapSack(: correct answerweightCap - weights[i - 1], weights, values, i - 1),
+                   knapSack(: correct answerweightCap, weights, values, i - 1));
+        }
+    }
+
+### The dynamic Approach
+
+We can store information in a two-dimensional array that has a row for every item and weightCap+ 1 number of collumns. Each element will represent a subproblem with the element in the bottom right being the optimal solution. 
+
+We are aiming to create a grid with the number of columns as there is weight capacity and the number of rows that there are items. 
+
+Example items: 
+Item 1 - 2 weight | 1 Value 
+Item 2 - 4 weight | 3 Value 
+Item 3 - 5 weight | 4 Value 
+Item 4 - 6 weight | 5 Value
+
+            Weight
+       | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |
+Item  0|
+      1|
+      2|
+      3|
+      4|
+
+As we consider each row i.e. item, we consider if it's weight can be contained in that column and if so we input its value. Starting with the a capacity of 0 no item could fit in the bag. Equally with no items the bag is empty no matter the capacity so we can fill in these values. 
+
+            Weight
+       | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |
+Item  0| 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+      1| 0 |
+      2| 0 |
+      3| 0 |
+      4| 0 |
+
+Now we can consider item 1. Item 1 has a weight of 2 so prior to the bag having a capacity of 2 the value of the bag is 0. When the capacity is 2 the value is the value of item 1 i.e. 1. Once item 1 is in the bag as the capacity of the bag continues to grow item 1 will be able to continue to fit in the bag
+
+            Weight
+       | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |
+Item  0| 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+      1| 0 | 0 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 |
+      2| 0 |
+      3| 0 |
+      4| 0 |
+
+
+When we get to the next row i.e. item 2, we consider this item and the item before. Item 2 has a weight of 4, as such nothing will change prior to the bag having this capacity. When it does have a capacity of 4 it will have the new highest value which is item 2's value of 3. This is the case until item 1 and 2 can fit (6 weight at column 6). Now both items can be added in the bag until the end. 
+
+            Weight
+       | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |
+Item  0| 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+      1| 0 | 0 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 |
+      2| 0 | 0 | 1 | 1 | 3 | 3 | 4 | 4 | 4 | 4 |
+      3| 0 |
+      4| 0 |
+
+The following item is now considered with the other items. Item 3 has weight 5 so nothing changes until then. Item 3 and item 1 have weight 6 so they can be combined at column 6. Item 3 and item 2 can be combined at column 9 and so this also increases. 
+
+            Weight
+       | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |
+Item  0| 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+      1| 0 | 0 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 |
+      2| 0 | 0 | 1 | 1 | 3 | 3 | 4 | 4 | 4 | 4 |
+      3| 0 | 0 | 1 | 1 | 3 | 4 | 5 | 5 | 5 | 5 | 
+      4| 0 |
+
+The same is repeated for the final row with the maximum profit being calculated at each level. We know that item 4 has weight 6 and so the numbers prior i.e. the combination will not change until column 6. 
+
+**Therefor we do not need to calculate these values** 
+
+            Weight
+       | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |
+Item  0| 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+      1| 0 | 0 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 |
+      2| 0 | 0 | 1 | 1 | 3 | 3 | 4 | 4 | 4 | 4 |
+      3| 0 | 0 | 1 | 1 | 3 | 4 | 5 | 5 | 5 | 5 | 
+      4| 0 | 0 | 1 | 1 | 3 | 4 | 5 | 5 | 6 | 6 |
+
+- Here you will see the bottom right number will always be the highest value 
+
+/home/spencer/LearnJava/KnapSack/Knapsack.java
+
+## Capturing Rainwater
+
+*The Problem*
+
+Heavy rainstorm over a highway with many potholes. The rainwater will collect in the empty holes creating puddles. Each pudddle can only get as high as the road surrounding it, any excess will flow away.
+
+The problem asks you to imagine water fell over a histogram (chart with a series of bars). How much rainwater would ge trapped in the spaces between these bars
+4 _  __
+    |  |
+3 _ |  |      __
+    |  |     |  |
+2 _ |  |__   |  |      __
+    |  |  |  |  |     |  |
+1 _ |  |  |__|  |   __|  |
+    |  |  |  |  |  |  |  |
+0 __|__|__|__|__|__|__|__|
+    [4  2  1  3  0  1  2 ]
+      
+This is how it would look filled with water: 
+
+4 _  __
+    |  |
+3 _ |  | 1 2  __
+    |  |WMWMW|  |
+2 _ |  |WMWMW|  |2  1  __
+    |  |  |MW|  |MWMWM|  |
+1 _ |  |  |MW|  |MWMWM|  |
+    |  |  |  |  |MW|  |  |
+0 __|__|__|__|__|MW|__|__|
+    [4  2  1  3  0  1  2 ]
+
+The water would fill in a total of 6. 
+
+### The Concept/ Foundation
+
+The amount of rainwater at any given space is the difference between: 
+
+1. The highest bar on the left vs the highest bar on the right 
+2. the height of the bar at the given index
+// Math.min returns the smallest of the numbers given as an input
+
+waterAtIndex = Math.min(highestLeftBound, highestRightBound) - heightOfIndex;
+
+// Math.min(highestLeftBound, highestRightBound) - this calculates which side is the lowest and where the water will run out from first
+
+// - height of index - this takes what the floor of the puddle is 
+
+// the final water level therefor is the floor of the puddle to where the water runs out
+
+#### Naive Solution: 
+
+1. Traverse every element in the array
+2. Find the highest left bound for the current index
+3. Find the highest right bound for the current index
+4. Take the lower of these two values
+5. Subtract the height of the current index from that lower value
+6. Add the difference to the total amount of water captured
+
+Example: 
+    public int naiveSolution(int[]heights) {
+        int totalWater = 0;
+        for (int i = 0; i < heights.length - 1; i++) {
+            int leftBound = 0;
+            int rightBound = 0;
+            // Here we only want to look at elements to the LEFT of index i, which are the elements at the lower indices
+            for (int j = 0; j <= i; j++) {
+                leftBound = Math.max(leftBound, heights[j]);
+            }
+            // Now here we only want to look at elements to the RIGHT of index i, which are the elements at the higher indices
+            for (int j = i; j < heights.length; j++) {
+                rightBound = Math.max(rightBound, heights[j]);
+            }
+            // Add the amount of water at index i to totalWater
+            totalWater += Math.min(leftBound, rightBound) - heights[i];
+        }
+        return totalWater;
+    }
+
+**_**
+While this is a functional solution, it requires nested for loops, which means it has a big O runtime of O(N^2). Let’s now look at a solution with a more efficient runtime!
+
+#### The optimised solution: 
+
+It is possible to solve this problem in 0(N) time by using the two-pointers approach. One pointer starts at the beginning of the array and one starts at the end. They move towards each other. 
+
+___
+totalWater = 0
+leftPointer = 0
+rightPointer = heights.length - 1
+leftBound = 0
+rightBound = 0
+___
+
+Left and right ponter will start at the beginning and end and move towards until they meet. 
+
+while leftPointer < rightPointer:
+    if the element at leftPointer <= the element at rightPointer:
+        -set leftBound to max value between leftPointer element and leftBound
+        -add difference between leftBound & the element at leftPointer to totalWater
+        -move leftPointer forward by one
+    else:
+        -set rightBound to max value between rightPointer element and rightBound
+        -add difference between rightBound & the element at rightPointer to totalWater
+        -move rightPointer back by one 
+
+return totalWater
+
+/home/spencer/LearnJava/RainWater/RainWater.java
+
+## Sieve of Erathosthenes
+
+The Sieve of Erathosthenes is one of the oldest-known algorithms. 
+
+The sieve provides a set of steps for finding prime numbers up to a given limit. 
+
+Reminder: 
+A prime number is a number with no divisors but 1 and itself. 
+
+### The Sieve implementation
+
+The Sieve works by assuming all numbers are prime and then successuvely marking them as NOT prime. 
+
+{2,.......,n}
+
+The algorithm works as follows: 
+
+1. Create a list of all integers from 2 to n.
+2. Start with the smallest number in the list (2, the smallest prime number).
+3. Mark all multiples of that number up to n as not prime.
+4. Move to the next non-marked number and repeat this process until the entire list has been covered.
+
+When the steps are complete, all remaining non-marked numbers are prime.
+
+Example: 
+Wanting all numbers that are prime up to 10
+
+- Start with a list 
+
+  2 3 4 5 6 7 8 9 10
+
+- Start with 2, mark all multiple up to 10 as not prime
+
+  2 3 X 5 X 7 X 9 X
+
+- Move to the next non marked number i.e. 3 
+
+  2 3 X 5 X 7 X X X
+
+- Continue with each unmarked number, in this case all of them are marked so this is the result. 
+
+  2 3 X 5 X 7 X X X
+
+#### Implementing in Java
+
+import java.util.*;
+
+class FindTrueIndices {
+
+   void findTrueIndices(boolean[] arr) {
+    // Create an ArrayList to store the indices of elements that are true
+    ArrayList<Integer> result = new ArrayList<>();
+
+    // Loop through the boolean array to find true values
+    for (int i = 0; i < arr.length; i++) {
+        if (arr[i]) { // Check if the current element is true
+            result.add(i); // Add the index of the true element to the result list
+        }
+    }
+
+    // Print the indices of elements that are true
+    System.out.println(Arrays.toString(result.toArray()));
+  }
+
+  public static void main(String[] args) {
+    FindTrueIndices myFindTrueIndices = new FindTrueIndices();
+    boolean[] testValues = {false, false, true, true, false, true, false, true};
+    myFindTrueIndices.findTrueIndices(testValues);
+  }
+}
+
+#### Optimisations
+
+##### End Boundary 
+
+In our basic implementation the outer loop iterated from 2 to n Because the inner loops marks multiples of a base value. we only need to check individual nubers lower than the square root of n. Consider the example of a limit of 10. 
+
+1. First, all multiples of 2 are marked:
+
+  2 3 X 5 X 7 X 9 X
+
+2. Then, all multiples of 3 are marked:
+
+  2 X X 5 X 7 X X 10
+
+3. 4 is greater than the square root of 10 (approximately 3.16), so we can break. If you look at the previous step, all non-prime numbers have indeed already been marked.
+
+
+##### First Multiple
+
+In our basic implementation the inner loop started checking multiple at 2 times the current number. We can skip a few checks starting the checks at current^2. 
+
+1. First, all multiples of 2 are marked:
+
+  2 3 X 5 X 7 X 9 X
+
+2. Then, all multiples of 3 are marked, but we can skip 6 (3 * 2) because it’s already been marked. Instead we start at 3^2 i.e. 9: 
+
+  2 3 X 5 X 7 X X X
+
+3. We’ve now completed the check with one less comparison.
+
+##### Pre-mark All Even Numbers: 
+
+This optimization comes in when building the initial array. There’s no need to ever check even numbers after 2, since they will never be prime, so they can all be marked as non-prime initially.
+
+#### Complexity
+
+The complexity of the Sieve with optimisations is 
+
+    O(n log(log n))
+
+#### Conclusion: 
+
+import java.util.*;
+
+public class SieveOfEratosthenes {
+    void sieveOfEratosthenes(int limit) {
+        boolean[] output = new boolean[limit + 1];
+        for (int x = 0; x <= limit; x++) {
+            output[x] = true;
+        }
+        output[0] = false;
+        output[1] = false;
+
+        for (int i = 2; i <= Math.pow(limit, 0.5); i++) {
+            if (output[i] == true) {
+                for (int j = (int) Math.pow(i, 2); j <= limit; j = j + i) {
+                    output[j] = false;
+                }
+            }
+        }
+
+        List<Integer> result = new ArrayList<Integer>();
+
+        for (int i = 0; i < output.length; i++) {
+            if (output[i] == true) {
+                result.add(i);
+            }
+        }
+
+        System.out.println(Arrays.toString(result.toArray()));
+    }
+
+public static void main(String[] args) {
+        int n = 7;
+        SieveOfEratosthenes g = new SieveOfEratosthenes();
+        g.sieveOfEratosthenes(n);
+    }
+
+}
